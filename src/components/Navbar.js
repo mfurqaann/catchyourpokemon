@@ -1,29 +1,34 @@
 import React from 'react'
 import { NavigationBar, WrapNav, WrapImg } from '../assets/styles/Navbar.styled'
 import logoPokemon from './../assets/images/pokemonlogo.png'
+import { Outlet, Link } from 'react-router-dom'
 
 const Navbar = () => {
-
-    return (
-        <NavigationBar>
+   return (
+      <>
+         <NavigationBar>
             <WrapNav>
-                <WrapImg>
-                    <img src={logoPokemon} alt="" />
-                </WrapImg>
-                <ul>
-                    <li>
-                        <a href="/#">My Pokemon List</a>
-                    </li>
-                    <li>
-                        <a href="/#">Pokemon List</a>
-                    </li>
-                    <li>
-                        <a href="/#">Pokemon Detail</a>
-                    </li>
-                </ul>
+               <WrapImg>
+                  <Link to="/">
+                     <img src={logoPokemon} alt="" />
+                  </Link>
+               </WrapImg>
+               <ul>
+                  <li>
+                     <Link to="/mypokemonlist">My Pokemon List</Link>
+                  </li>
+                  <li>
+                     <Link to="/listpokemon">Pokemon List</Link>
+                  </li>
+                  <li>
+                     <Link to="/pokemondetail">Pokemon Detail</Link>
+                  </li>
+               </ul>
             </WrapNav>
-        </NavigationBar>
-    )
+         </NavigationBar>
+         {/* <Outlet /> */}
+      </>
+   )
 }
 
 export default Navbar

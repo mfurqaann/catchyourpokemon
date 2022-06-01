@@ -1,14 +1,13 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'
 
 export const ImageBox = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
-
+   position: relative;
+   text-align: center;
+   cursor: pointer;
+   height: 100%;
 `
 
 export const Image = styled.img`
-    width: 120px;
-    height: 120px;
+   width: 120px;
+   height: 120px;
 `

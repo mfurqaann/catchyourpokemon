@@ -22,19 +22,21 @@ const PokemonList = () => {
             getDataPokemon(results)
          }
 
-         showImage(response.data.results)
 
+         showImage(response.data.results)
          setLoading(false)
       } catch (err) {
          console.log('error')
       }
    }
 
+
+
    const getDataPokemon = async (results) => {
       results.forEach(async (pokemon) => {
          const response = await axios.get(`${baseAPI}/${pokemon.name}`)
 
-         await setItemPokemon((prevValue) => [...prevValue, response.data])
+         setItemPokemon((prevValue) => [...prevValue, response.data])
          await itemPokemon.sort((a, b) => a.id - b.id)
          return itemPokemon
       })
@@ -44,27 +46,32 @@ const PokemonList = () => {
       catchPokemon()
    }, [])
 
+
    displayPokemon = itemPokemon.map((itemPoke) => {
       let imgPokemon = itemPoke.sprites.other.dream_world.front_default
       return (
          <ListPokemon
-            isLoading={loading}
             itemPoke={itemPoke}
             imgPokemon={imgPokemon}
+            types={itemPoke.types[0].type}
          />
       )
    })
 
+
+
+
    return (
       <Grid container>
          <Grid container lg={12} justifyContent="center" spacing={2}>
+
+
             {displayPokemon}
 
-            {loading ? (
-               'loading'
-            ) : (
-               <Button onClick={() => catchPokemon()}>Load More Pokemon</Button>
-            )}
+            {!loading ? <Button onClick={catchPokemon}>Load More Pokemon</Button> : 'loading'}
+
+
+
          </Grid>
       </Grid>
    )

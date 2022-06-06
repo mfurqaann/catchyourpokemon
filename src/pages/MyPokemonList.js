@@ -9,8 +9,9 @@ const MyPokemonList = () => {
    useEffect(() => {
       getAll().then((pokemonitem) => setMypoke(pokemonitem))
    }, [])
+
    return (
-      <div style={{ color: 'white' }}>
+      <div style={{ color: 'white', textTransform: 'capitalize' }}>
          {mypoke.map((item) => (
             <div>{item.name}</div>
          ))}

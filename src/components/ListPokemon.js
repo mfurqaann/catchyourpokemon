@@ -5,7 +5,7 @@ import { IdPoke } from '../assets/styles/IdPoke.styled'
 import { Image, ImageBox } from '../assets/styles/ImageBox.styled'
 import { useNavigate } from 'react-router-dom'
 
-const ListPokemon = ({ itemPoke, imgPokemon }) => {
+const ListPokemon = ({ itemPoke, imgPokemon, types }) => {
    let navigate = useNavigate()
 
    const clickToDetail = (item) => {
@@ -23,7 +23,7 @@ const ListPokemon = ({ itemPoke, imgPokemon }) => {
                position: 'relative',
             }}
          >
-            <ImageBox onClick={clickToDetail}>
+            <ImageBox onClick={clickToDetail} type={types.name}>
                <IdPoke>{itemPoke.id}</IdPoke>
                <Image src={imgPokemon} alt={itemPoke.name} />
                <ItemName>{itemPoke.name}</ItemName>

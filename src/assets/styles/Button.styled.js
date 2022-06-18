@@ -15,7 +15,7 @@ export const Button = styled.button`
    }
 
    ${(props) =>
-      props.absolute
-         ? 'position: absolute ; left: 50%; transform: translateX(-50%); bottom: 10px; margin: 0'
+      props.submitInput
+         ? 'width: 350px ; height: 100px; font-size: 50px; text-transform: uppercase'
          : ''}
 `

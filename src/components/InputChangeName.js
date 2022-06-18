@@ -1,42 +1,55 @@
-import React, { useState } from 'react'
-import { useIndexedDB } from 'react-indexed-db';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useContext } from 'react'
+import { useIndexedDB } from 'react-indexed-db'
+import { useNavigate } from 'react-router-dom'
+import { Input } from '../assets/styles/Input.styled'
+import { Button } from '../assets/styles/Button.styled'
+import { PokemonDetailContext } from '../context/DetailContext/PokemonDetailContext'
 
 const InputChangeName = ({ state }) => {
-    const [inputName, setInputname] = useState('')
+   let CtxDetail = useContext(PokemonDetailContext)
+   const [inputName, setInputname] = useState(CtxDetail.namePokemon)
 
-    const { update } = useIndexedDB('pokemonStorage')
+   const { update } = useIndexedDB('pokemonStorage')
 
-    let navigate = useNavigate()
+   let navigate = useNavigate()
 
-    const handleChangeName = (e) => {
-        setInputname(e.target.value);
-    }
+   const handleChangeName = (e) => {
+      setInputname(e.target.value)
+   }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+   const handleSubmit = (e) => {
+      e.preventDefault()
 
-        if (inputName.length === 0) {
-            return alert('silahka isi dulu')
+      if (inputName.length === 0) {
+         return alert('silahkan isi dulu')
+      }
 
-        }
+      update({
+         id: state.id,
+         name: inputName,
+         img: state.sprites.other.dream_world.front_default,
+      }).then((e) => {
+         alert('Updated')
+      })
 
-        update({ id: state.id, name: inputName, img: state.sprites.other.dream_world.front_default }).then(
-            event => {
-                alert('Edited')
-            }
-        )
+      CtxDetail.setIsClick(false)
+      navigate('../mypokemonlist')
+   }
 
-        navigate('../mypokemonlist')
-
-    }
-
-    return (
-        <form onSubmit={handleSubmit}>
-            <input onChange={handleChangeName} value={inputName} />
-            <button>Submit</button>
-        </form>
-    )
+   return (
+      <form
+         onSubmit={handleSubmit}
+         style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+         }}
+      >
+         <Input onChange={handleChangeName} value={inputName} />
+         <Button submitInput>Submit</Button>
+      </form>
+   )
 }
 
 export default InputChangeName

@@ -1,19 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { Grid, Paper } from '@mui/material'
 import { ItemName } from '../assets/styles/ItemName.styled'
 import { IdPoke } from '../assets/styles/IdPoke.styled'
 import { Image, ImageBox } from '../assets/styles/ImageBox.styled'
 import { useNavigate } from 'react-router-dom'
+import { PokemonListContext } from '../context/ListContext/PokemonListContext'
 
-const ListPokemon = ({ itemPoke, imgPokemon, types }) => {
+const ListPokemon = ({ itemPoke, imgPokemon, types, id }) => {
    let navigate = useNavigate()
 
-   const clickToDetail = (item) => {
-      navigate('../pokemondetail', { state: itemPoke })
+   const clickToDetail = () => {
+      navigate('../pokemondetail/ability', { state: itemPoke })
    }
 
    return (
-      <Grid item xs={12} lg={3} key={itemPoke.name}>
+      <Grid item xs={12} lg={3} key={id}>
          <Paper
             elevation={3}
             sx={{

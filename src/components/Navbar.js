@@ -1,9 +1,15 @@
 import React from 'react'
 import { NavigationBar, WrapNav, WrapImg } from '../assets/styles/Navbar.styled'
 import logoPokemon from './../assets/images/pokemonlogo.png'
-import { Outlet, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
+   let Nav1 = 'My Pokemon List'
+   let Nav2 = 'Pokemon List'
+   let Nav3 = 'Pokemon Detail'
+
+   const handleActiveBtn = () => {}
+
    return (
       <>
          <NavigationBar>
@@ -15,18 +21,17 @@ const Navbar = () => {
                </WrapImg>
                <ul>
                   <li>
-                     <Link to="/mypokemonlist">My Pokemon List</Link>
+                     <Link to="/mypokemonlist">{Nav1}</Link>
                   </li>
                   <li>
-                     <Link to="/listpokemon">Pokemon List</Link>
+                     <Link to="/listpokemon">{Nav2}</Link>
                   </li>
                   <li>
-                     <Link to="/pokemondetail">Pokemon Detail</Link>
+                     <Link to="/pokemondetail">{Nav3}</Link>
                   </li>
                </ul>
             </WrapNav>
          </NavigationBar>
-         {/* <Outlet /> */}
       </>
    )
 }

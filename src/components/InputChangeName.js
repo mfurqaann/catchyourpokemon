@@ -30,10 +30,9 @@ const InputChangeName = ({ state }) => {
          img: state.sprites.other.dream_world.front_default,
       }).then((e) => {
          alert('Updated')
+         CtxDetail.setIsClick(false)
+         navigate('../mypokemonlist')
       })
-
-      CtxDetail.setIsClick(false)
-      navigate('../mypokemonlist')
    }
 
    return (

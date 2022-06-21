@@ -23,7 +23,7 @@ function App() {
             <PokemonListProvider>
                <PokemonDetailProvider>
                   <Routes>
-                     <Route exact path="/" element={<Home />} />
+                     <Route exact path="/" element={<PokemonList />} />
                      <Route path="listpokemon" element={<PokemonList />} />
                      <Route path="mypokemonlist" element={<MyPokemonList />} />
                      <Route path="pokemondetail" element={<PokemonDetail />}>

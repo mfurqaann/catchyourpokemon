@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 const Navbar = () => {
    let Nav1 = 'My Pokemon List'
    let Nav2 = 'Pokemon List'
-   let Nav3 = 'Pokemon Detail'
 
    const handleActiveBtn = () => {}
 
@@ -25,9 +24,6 @@ const Navbar = () => {
                   </li>
                   <li>
                      <Link to="/listpokemon">{Nav2}</Link>
-                  </li>
-                  <li>
-                     <Link to="/pokemondetail">{Nav3}</Link>
                   </li>
                </ul>
             </WrapNav>

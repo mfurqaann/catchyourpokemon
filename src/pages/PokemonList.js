@@ -11,17 +11,19 @@ const PokemonList = () => {
 
    useEffect(() => {
       ctxPokemon.catchPokemon()
+      ctxPokemon.setIsClick(false)
    }, [])
 
    displayPokemon = ctxPokemon.itemPokemon.map((itemPoke) => {
       let imgPokemon = itemPoke.sprites.other.dream_world.front_default
       return (
-         <ListPokemon
-            itemPoke={itemPoke}
-            imgPokemon={imgPokemon}
-            types={itemPoke.types[0].type}
-            id={itemPoke.id}
-         />
+         <React.Fragment key={itemPoke.id}>
+            <ListPokemon
+               itemPoke={itemPoke}
+               imgPokemon={imgPokemon}
+               types={itemPoke.types[0].type}
+            />
+         </React.Fragment>
       )
    })
 

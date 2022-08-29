@@ -7,11 +7,11 @@ import {
 
 const TypesPokemon = () => {
    let location = useLocation()
-   let state = location.state
+   let state = location.state.data
    return (
       <ContainerBoxAbility>
-         {state.types.map((type) => (
-            <BoxAbility>{type.type.name}</BoxAbility>
+         {state.types.map((type, index) => (
+            <BoxAbility key={index}>{type.type.name}</BoxAbility>
          ))}
       </ContainerBoxAbility>
    )

@@ -26,6 +26,8 @@ const PokemonDetailProvider = (props) => {
       }).then(() => {
          console.log('sukses')
       })
+
+
    }
 
    const DetailContext = {

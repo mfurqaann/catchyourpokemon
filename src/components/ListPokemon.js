@@ -6,15 +6,15 @@ import { Image, ImageBox } from '../assets/styles/ImageBox.styled'
 import { useNavigate } from 'react-router-dom'
 import { PokemonListContext } from '../context/ListContext/PokemonListContext'
 
-const ListPokemon = ({ itemPoke, imgPokemon, types, id }) => {
-   let navigate = useNavigate()
+const ListPokemon = ({ itemPoke, imgPokemon }) => {
+   let ctxPokemon = useContext(PokemonListContext)
 
-   const clickToDetail = () => {
-      navigate('../pokemondetail/ability', { state: itemPoke })
+   const clickToDetail = (id) => {
+      ctxPokemon.getDetail(id)
    }
 
    return (
-      <Grid item xs={12} lg={3} key={id}>
+      <Grid item xs={12} lg={3}>
          <Paper
             elevation={3}
             sx={{
@@ -24,7 +24,7 @@ const ListPokemon = ({ itemPoke, imgPokemon, types, id }) => {
                position: 'relative',
             }}
          >
-            <ImageBox onClick={clickToDetail} type={types.name}>
+            <ImageBox onClick={() => clickToDetail(itemPoke.id)} type={itemPoke.types.name}>
                <IdPoke>{itemPoke.id}</IdPoke>
                <Image src={imgPokemon} alt={itemPoke.name} />
                <ItemName>{itemPoke.name}</ItemName>

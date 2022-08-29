@@ -21,18 +21,18 @@ function App() {
          <Container>
             <Navbar />
             <PokemonListProvider>
-               <PokemonDetailProvider>
-                  <Routes>
-                     <Route exact path="/" element={<PokemonList />} />
-                     <Route path="listpokemon" element={<PokemonList />} />
-                     <Route path="mypokemonlist" element={<MyPokemonList />} />
-                     <Route path="pokemondetail" element={<PokemonDetail />}>
-                        <Route path="ability" element={<AbilityPokemon />} />
-                        <Route path="stats" element={<StatsPokemon />} />
-                        <Route path="types" element={<TypesPokemon />} />
-                     </Route>
-                  </Routes>
-               </PokemonDetailProvider>
+               {/* <PokemonDetailProvider> */}
+               <Routes>
+                  <Route exact path="/" element={<PokemonList />} />
+                  <Route path="listpokemon" element={<PokemonList />} />
+                  <Route path="mypokemonlist" element={<MyPokemonList />} />
+                  <Route path="pokemondetail" element={<PokemonDetail />}>
+                     <Route path="ability" element={<AbilityPokemon />} />
+                     <Route path="stats" element={<StatsPokemon />} />
+                     <Route path="types" element={<TypesPokemon />} />
+                  </Route>
+               </Routes>
+               {/* </PokemonDetailProvider> */}
             </PokemonListProvider>
          </Container>
       </Router>

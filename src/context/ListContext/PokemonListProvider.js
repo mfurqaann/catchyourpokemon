@@ -1,14 +1,24 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { PokemonListContext } from './../ListContext/PokemonListContext'
+import { useIndexedDB } from 'react-indexed-db'
 
 const PokemonProvider = (props) => {
-   let baseAPI = 'https://pokeapi.co/api/v2/pokemon'
+   let location = useLocation()
+   let state = location.state
 
+
+   let baseAPI = 'https://pokeapi.co/api/v2/pokemon'
+   let navigate = useNavigate();
    const [itemPokemon, setItemPokemon] = useState([])
    const [baseURL, setbaseUrl] = useState('https://pokeapi.co/api/v2/pokemon/')
    const [loading, setLoading] = useState(false)
+   const [isClick, setIsClick] = useState(false)
+   const [dataExist, setDataExist] = useState()
+   const { add } = useIndexedDB('PokemonStorage')
+   const { getByID } = useIndexedDB('pokemonStorage')
+
 
    const catchPokemon = async () => {
       try {
@@ -38,11 +48,55 @@ const PokemonProvider = (props) => {
       })
    }
 
+   const getDetail = async (id, nickname) => {
+      try {
+         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+
+         navigate('../pokemondetail/ability', {
+            state: {
+               data: response.data,
+               nickname: nickname
+            }
+         })
+      } catch (err) {
+         console.log(err)
+      }
+   }
+
+   // Catch Pokemon
+
+   const handleCatch = () => {
+      setIsClick(true)
+      add({
+         id: state.data.id,
+         name: state.data.name,
+         nickname: state.data.name,
+         image: state.data.sprites.other.dream_world.front_default,
+      }).then(() => {
+         console.log('sukses')
+      })
+   }
+
+   useEffect(() => {
+      getByID(state?.id).then(data => {
+         setDataExist(data)
+      })
+   }, [])
+
+
    const ListContext = {
       itemPokemon: itemPokemon,
-      catchPokemon: catchPokemon,
       loading: loading,
+      isClick: isClick,
+      catchPokemon: catchPokemon,
+      getDetail: getDetail,
+      handleCatch: handleCatch,
+      setIsClick: setIsClick,
+      dataExist: dataExist
    }
+
+
+
 
    return (
       <PokemonListContext.Provider value={ListContext}>

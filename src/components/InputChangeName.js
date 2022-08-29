@@ -1,36 +1,39 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useIndexedDB } from 'react-indexed-db'
 import { useNavigate } from 'react-router-dom'
 import { Input } from '../assets/styles/Input.styled'
 import { Button } from '../assets/styles/Button.styled'
-import { PokemonDetailContext } from '../context/DetailContext/PokemonDetailContext'
+
+import { PokemonListContext } from '../context/ListContext/PokemonListContext'
 
 const InputChangeName = ({ state }) => {
-   let CtxDetail = useContext(PokemonDetailContext)
-   const [inputName, setInputname] = useState(CtxDetail.namePokemon)
+   let CtxPokemon = useContext(PokemonListContext)
+   const [nickName, setNickname] = useState(state.name)
 
    const { update } = useIndexedDB('pokemonStorage')
 
    let navigate = useNavigate()
 
    const handleChangeName = (e) => {
-      setInputname(e.target.value)
+      setNickname(e.target.value)
    }
+
 
    const handleSubmit = (e) => {
       e.preventDefault()
 
-      if (inputName.length === 0) {
+      if (nickName.length === 0) {
          return alert('silahkan isi dulu')
       }
 
       update({
          id: state.id,
-         name: inputName,
-         img: state.sprites.other.dream_world.front_default,
+         name: state.name,
+         img: state.image,
+         nickname: nickName
       }).then((e) => {
          alert('Updated')
-         CtxDetail.setIsClick(false)
+         CtxPokemon.setIsClick(false)
          navigate('../mypokemonlist')
       })
    }
@@ -45,7 +48,7 @@ const InputChangeName = ({ state }) => {
             flexWrap: 'wrap',
          }}
       >
-         <Input onChange={handleChangeName} value={inputName} />
+         <Input onChange={handleChangeName} value={nickName} />
          <Button submitInput>Submit</Button>
       </form>
    )

@@ -7,14 +7,12 @@ import {
 
 const StatsPokemon = () => {
    let location = useLocation()
-   let state = location.state
-
-   console.log(state.stats)
+   let state = location.state.data
 
    return (
       <ContainerBoxAbility>
-         {state.stats.map((stats) => (
-            <BoxAbility>{stats.stat.name}</BoxAbility>
+         {state.stats.map((stats, index) => (
+            <BoxAbility key={index}>{stats.stat.name}</BoxAbility>
          ))}
       </ContainerBoxAbility>
    )

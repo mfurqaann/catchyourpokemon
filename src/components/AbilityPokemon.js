@@ -7,8 +7,7 @@ import {
 
 const AbilityPokemon = () => {
    let location = useLocation()
-   let state = location.state
-
+   let state = location.state.data
    return (
       <ContainerBoxAbility>
          {state.abilities.map((ability, index) => (
